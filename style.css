@@ -13,7 +13,6 @@ body {
 body.light { background: linear-gradient(135deg,#eaf3ff,#ffffff); }
 body.dark { background: linear-gradient(135deg,#0f0f0f,#1c1c1c); color:white; }
 
-/* Boot */
 .boot {
   position:fixed;
   width:100%;
@@ -47,7 +46,6 @@ body.dark { background: linear-gradient(135deg,#0f0f0f,#1c1c1c); color:white; }
 @keyframes spin { to { transform:rotate(360deg); } }
 @keyframes fadeOut { to { opacity:0; visibility:hidden; } }
 
-/* Desktop */
 .desktop {
   width:100vw;
   height:100vh;
@@ -55,7 +53,6 @@ body.dark { background: linear-gradient(135deg,#0f0f0f,#1c1c1c); color:white; }
   background-position:center;
 }
 
-/* Taskbar */
 .taskbar {
   position:fixed;
   bottom:0;
@@ -77,7 +74,6 @@ body.dark .taskbar { background:rgba(0,0,0,0.5); }
 }
 .task-icon:hover { transform:scale(1.2); }
 
-/* Start */
 .start {
   position:fixed;
   bottom:70px;
@@ -108,7 +104,6 @@ body.dark .start { background:rgba(0,0,0,0.7); }
   border-radius:10px;
 }
 
-/* Window */
 .window {
   position:absolute;
   top:120px;
