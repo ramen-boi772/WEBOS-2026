@@ -1,131 +1,124 @@
 body {
   margin: 0;
   font-family: Segoe UI, sans-serif;
+  overflow: hidden;
   transition: 0.3s;
 }
 
-/* Boot Screen */
-.boot-screen {
+body.light { background: #eaf3ff; }
+body.dark { background: #111; color: white; }
+
+/* Boot */
+.boot {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #0a0a0a;
+  background: black;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-  z-index: 9999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  z-index:9999;
 }
 
 /* Desktop */
 .desktop {
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-}
-
-/* Themes */
-body.light {
-  background-color: #e6f0ff;
-  color: black;
-}
-
-body.dark {
-  background-color: #111;
-  color: white;
+  width:100vw;
+  height:100vh;
+  background-size:cover;
+  background-position:center;
 }
 
 /* Taskbar */
 .taskbar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:50px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: rgba(255,255,255,0.5);
 }
 
 body.dark .taskbar {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
 }
 
-.taskbar-icon {
-  font-size: 25px;
-  cursor: pointer;
+.task-icon {
+  font-size:22px;
+  margin:0 10px;
+  cursor:pointer;
+}
+
+/* Start Menu */
+.start {
+  position:fixed;
+  bottom:60px;
+  left:50%;
+  transform:translateX(-50%);
+  background: rgba(255,255,255,0.9);
+  padding:20px;
+  border-radius:15px;
+  display:none;
+  backdrop-filter: blur(20px);
+}
+
+body.dark .start {
+  background: rgba(0,0,0,0.8);
+}
+
+.start div {
+  padding:8px;
+  cursor:pointer;
 }
 
 /* Window */
 .window {
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  display: none;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  position:absolute;
+  top:100px;
+  left:100px;
+  width:400px;
+  background:white;
+  border-radius:10px;
+  display:none;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
 body.dark .window {
-  background: #222;
-  color: white;
+  background:#222;
+  color:white;
 }
 
-.window-header {
-  padding: 10px;
-  background: #0078ff;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
+.header {
+  background:#0078ff;
+  color:white;
+  padding:8px;
+  cursor:move;
+  display:flex;
+  justify-content:space-between;
 }
 
-.window-content {
-  padding: 15px;
+.content {
+  padding:15px;
 }
 
-.settings-panel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.start-menu {
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  background: rgba(255,255,255,0.8);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(20px);
-}
-
-body.dark .start-menu {
-  background: rgba(0,0,0,0.7);
-  color: white;
-}
-
-.start-menu div {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.calc-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-
+/* Apps */
 textarea {
-  width: 100%;
-  height: 200px;
+  width:100%;
+  height:200px;
+}
+
+.calc-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:5px;
+}
+
+#frame {
+  width:100%;
+  height:200px;
+  margin-top:10px;
 }
