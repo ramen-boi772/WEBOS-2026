@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: Segoe UI, sans-serif;
+  transition: 0.3s;
+}
+
+/* Boot Screen */
+.boot-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  z-index: 9999;
+}
+
+/* Desktop */
+.desktop {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Themes */
+body.light {
+  background-color: #e6f0ff;
+  color: black;
+}
+
+body.dark {
+  background-color: #111;
+  color: white;
+}
+
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.dark .taskbar {
+  background: rgba(0,0,0,0.5);
+}
+
+.taskbar-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Window */
+.window {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  display: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+body.dark .window {
+  background: #222;
+  color: white;
+}
+
+.window-header {
+  padding: 10px;
+  background: #0078ff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.window-content {
+  padding: 15px;
+}
+
+.settings-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
