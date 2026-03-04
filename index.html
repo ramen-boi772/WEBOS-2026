@@ -3,13 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VexoOS 2026</title>
+<title>VexoOS 2026 Pro</title>
 
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0078ff">
-
 </head>
 
 <body class="light">
@@ -17,7 +13,6 @@
 <!-- BOOT -->
 <div class="boot" id="boot">
   <div class="boot-logo">VexoOS 2026</div>
-  <div class="loader"></div>
 </div>
 
 <!-- DESKTOP -->
@@ -25,17 +20,20 @@
 
   <!-- START MENU -->
   <div class="start" id="start">
-    <div oneclick="openApp('calc')">🧮 Calculator</div>
-    <div oneclick="openApp('note')">📝 Notepad</div>
-    <div oneclick="openApp('browser')">🌐 Browser</div>
-    <div oneclick="toggleTheme()">🌙 Toggle Theme</div>
+    <div onclick="openApp('calc')">🧮 Calculator</div>
+    <div onclick="openApp('note')">📝 Notepad</div>
+    <div onclick="openApp('browser')">🌐 Browser</div>
+    <div onclick="toggleTheme()">🌙 Toggle Theme</div>
   </div>
 
-  <!-- CALCULATOR -->
+  <!-- CALC -->
   <div class="window" id="calc">
-    <div class="header">
+    <div class="header" onmousedown="dragStart(event,this.parentElement)">
       <span>Calculator</span>
-      <button onclick="closeApp('calc')">✖</button>
+      <div>
+        <button onclick="minimizeApp('calc')">—</button>
+        <button onclick="closeApp('calc')">✖</button>
+      </div>
     </div>
     <div class="content">
       <input type="text" id="display" readonly>
@@ -44,17 +42,14 @@
         <button onclick="press('8')">8</button>
         <button onclick="press('9')">9</button>
         <button onclick="press('/')">÷</button>
-
         <button onclick="press('4')">4</button>
         <button onclick="press('5')">5</button>
         <button onclick="press('6')">6</button>
         <button onclick="press('*')">×</button>
-
         <button onclick="press('1')">1</button>
         <button onclick="press('2')">2</button>
         <button onclick="press('3')">3</button>
         <button onclick="press('-')">−</button>
-
         <button onclick="press('0')">0</button>
         <button onclick="clearCalc()">C</button>
         <button onclick="calculate()">=</button>
@@ -65,9 +60,12 @@
 
   <!-- NOTEPAD -->
   <div class="window" id="note">
-    <div class="header">
+    <div class="header" onmousedown="dragStart(event,this.parentElement)">
       <span>Notepad</span>
-      <button onclick="closeApp('note')">✖</button>
+      <div>
+        <button onclick="minimizeApp('note')">—</button>
+        <button onclick="closeApp('note')">✖</button>
+      </div>
     </div>
     <div class="content">
       <textarea id="notes" onkeyup="saveNotes()"></textarea>
@@ -75,25 +73,31 @@
   </div>
 
   <!-- BROWSER -->
-<div class="window large" id="browser">
-  <div class="header">
-    <span>🌐 VexoOS Browser</span>
-    <button onclick="closeApp('browser')">✖</button>
+  <div class="window large" id="browser">
+    <div class="header" onmousedown="dragStart(event,this.parentElement)">
+      <span>Browser</span>
+      <div>
+        <button onclick="minimizeApp('browser')">—</button>
+        <button onclick="closeApp('browser')">✖</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="browser-bar">
+        <button onclick="goBack()">⬅</button>
+        <button onclick="goForward()">➡</button>
+        <input type="text" id="url" placeholder="Search or enter website...">
+        <button onclick="loadSite()">Go</button>
+      </div>
+      <iframe id="frame"></iframe>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="browser-bar">
-      <button onclick="goBack()">⬅</button>
-      <button onclick="goForward()">➡</button>
-      <input type="text" id="url" placeholder="Search or enter website...">
-      <button onclick="loadSite()">Go</button>
-    </div>
-    <iframe id="frame"></iframe>
-  </div>
 </div>
+
 <!-- TASKBAR -->
 <div class="taskbar">
-  <div class="task-icon" onclick="toggleStart()">🪟</div>
+  <div onclick="toggleStart()">🪟</div>
+  <div id="task-apps"></div>
 </div>
 
 <script src="script.js"></script>
