@@ -75,21 +75,22 @@
   </div>
 
   <!-- BROWSER -->
-  <div class="window large" id="browser">
-    <div class="header">
-      <span>Browser</span>
-      <button onclick="closeApp('browser')">✖</button>
-    </div>
-      <div class="content">
-      <div class="browser-bar">
-        <input type="text" id="url" placeholder="Enter website...">
-        <button onclick="loadSite()">Go</button>
-      </div>      <iframe id="frame"></iframe>
-    </div>
+<div class="window large" id="browser">
+  <div class="header">
+    <span>🌐 VexoOS Browser</span>
+    <button onclick="closeApp('browser')">✖</button>
   </div>
 
+  <div class="content">
+    <div class="browser-bar">
+      <button onclick="goBack()">⬅</button>
+      <button onclick="goForward()">➡</button>
+      <input type="text" id="url" placeholder="Search or enter website...">
+      <button onclick="loadSite()">Go</button>
+    </div>
+    <iframe id="frame"></iframe>
+  </div>
 </div>
-
 <!-- TASKBAR -->
 <div class="taskbar">
   <div class="task-icon" onclick="toggleStart()">🪟</div>
