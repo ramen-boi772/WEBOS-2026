@@ -1,148 +1,81 @@
 let zIndex = 1;
 
-const desktop = document.getElementById("desktop");
-const start = document.getElementById("start");
-const notes = document.getElementById("notes");
-const display = document.getElementById("display");
-
 window.onload = () => {
-
-  // Boot screen
-  setTimeout(()=>{
-    document.getElementById("boot").style.display="none";
-  },2000);
-
-  // Load saved theme
-  if(localStorage.getItem("theme")){
-    document.body.className = localStorage.getItem("theme");
-  }
-
-  // Load saved notes
-  if(localStorage.getItem("notes")){
-    notes.value = localStorage.getItem("notes");
-  }
+  setTimeout(()=>boot.style.display="none",2000);
+  if(localStorage.theme) document.body.className=localStorage.theme;
+  if(localStorage.notes) notes.value=localStorage.notes;
 };
-
-//////////////////////
-// START MENU
-//////////////////////
 
 function toggleStart(){
   start.style.display =
     start.style.display==="block"?"none":"block";
 }
 
-//////////////////////
-// WINDOW SYSTEM
-//////////////////////
-
 function openApp(id){
-  const win = document.getElementById(id);
-  win.style.display = "block";
-  win.style.zIndex = ++zIndex;
+  const win=document.getElementById(id);
+  win.style.display="flex";
+  win.style.zIndex=++zIndex;
 }
 
 function closeApp(id){
   document.getElementById(id).style.display="none";
 }
 
-//////////////////////
-// THEME SYSTEM
-//////////////////////
+function minimizeApp(id){
+  document.getElementById(id).style.display="none";
+}
 
 function toggleTheme(){
   document.body.classList.toggle("dark");
   document.body.classList.toggle("light");
-  localStorage.setItem("theme", document.body.className);
+  localStorage.theme=document.body.className;
 }
 
-//////////////////////
-// CALCULATOR
-//////////////////////
+function press(v){ display.value+=v; }
+function calculate(){ try{display.value=eval(display.value);}catch{display.value="Error";}}
+function clearCalc(){ display.value=""; }
 
-function press(val){
-  display.value += val;
-}
-
-function calculate(){
-  try{
-    display.value = eval(display.value);
-  }catch{
-    display.value = "Error";
-  }
-}
-
-function clearCalc(){
-  display.value="";
-}
-
-//////////////////////
-// NOTEPAD
-//////////////////////
-
-function saveNotes(){
-  localStorage.setItem("notes", notes.value);
-}
-
-//////////////////////
-// BROWSER SYSTEM
-//////////////////////
+function saveNotes(){ localStorage.notes=notes.value; }
 
 function loadSite(){
-  let input = document.getElementById("url").value.trim();
-  const frame = document.getElementById("frame");
-
+  let input=url.value.trim();
   if(!input) return;
 
-  // If no dot → treat as search
   if(!input.includes(".")){
-    frame.src = "https://duckduckgo.com/?q=" + encodeURIComponent(input);
+    frame.src="https://duckduckgo.com/?q="+encodeURIComponent(input);
     return;
   }
 
-  // Add https if missing
-  if(!input.startsWith("http")){
-    input = "https://" + input;
-  }
+  if(!input.startsWith("http"))
+    input="https://"+input;
 
-  frame.src = input;
-
-  // Fallback if site blocks iframe
-  setTimeout(()=>{
-    try{
-      frame.contentWindow.location.href;
-    }catch{
-      frame.src = "https://duckduckgo.com/?q=" + encodeURIComponent(input);
-    }
-  },1500);
+  frame.src=input;
 }
 
-function goBack(){
-  document.getElementById("frame").contentWindow.history.back();
-}
+function goBack(){ frame.contentWindow.history.back(); }
+function goForward(){ frame.contentWindow.history.forward(); }
 
-function goForward(){
-  document.getElementById("frame").contentWindow.history.forward();
-}
-
-// Enter key support
-document.addEventListener("DOMContentLoaded", ()=>{
-  const urlInput = document.getElementById("url");
-  if(urlInput){
-    urlInput.addEventListener("keydown", function(e){
-      if(e.key === "Enter"){
-        loadSite();
-      }
-    });
-  }
+url.addEventListener("keydown",e=>{
+  if(e.key==="Enter") loadSite();
 });
 
-//////////////////////
-// SERVICE WORKER
-//////////////////////
+function dragStart(e,win){
+  let shiftX=e.clientX-win.getBoundingClientRect().left;
+  let shiftY=e.clientY-win.getBoundingClientRect().top;
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
-  .then(()=>console.log("Service Worker Registered"))
-  .catch(err=>console.log("SW Error:", err));
+  function moveAt(pageX,pageY){
+    win.style.left=pageX-shiftX+"px";
+    win.style.top=pageY-shiftY+"px";
+  }
+
+  function onMouseMove(e){
+    moveAt(e.pageX,e.pageY);
+  }
+
+  document.addEventListener("mousemove",onMouseMove);
+
+  document.onmouseup=function(){
+    document.removeEventListener("mousemove",onMouseMove);
+    document.onmouseup=null;
+  };
 }
