@@ -3,40 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VexoOS 2026 Pro</title>
-
+<title>VexoOS 2026 Ultimate</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="light">
 
 <!-- BOOT -->
-<div class="boot" id="boot">
-  <div class="boot-logo">VexoOS 2026</div>
+<div id="boot" class="boot">VexoOS 2026</div>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <h2>Welcome</h2>
+  <button onclick="enterOS()">Enter</button>
 </div>
 
 <!-- DESKTOP -->
-<div class="desktop" id="desktop">
+<div id="desktop" class="desktop">
 
   <!-- START MENU -->
-  <div class="start" id="start">
+  <div id="start" class="start">
     <div onclick="openApp('calc')">🧮 Calculator</div>
     <div onclick="openApp('note')">📝 Notepad</div>
     <div onclick="openApp('browser')">🌐 Browser</div>
+    <div onclick="openApp('files')">📁 File Explorer</div>
     <div onclick="toggleTheme()">🌙 Toggle Theme</div>
   </div>
 
-  <!-- CALC -->
+  <!-- CALCULATOR -->
   <div class="window" id="calc">
     <div class="header" onmousedown="dragStart(event,this.parentElement)">
-      <span>Calculator</span>
+      Calculator
       <div>
+        <button onclick="snapLeft('calc')">⬅</button>
+        <button onclick="snapRight('calc')">➡</button>
         <button onclick="minimizeApp('calc')">—</button>
         <button onclick="closeApp('calc')">✖</button>
       </div>
     </div>
     <div class="content">
-      <input type="text" id="display" readonly>
+      <input id="display" readonly>
       <div class="calc-grid">
         <button onclick="press('7')">7</button>
         <button onclick="press('8')">8</button>
@@ -61,7 +66,7 @@
   <!-- NOTEPAD -->
   <div class="window" id="note">
     <div class="header" onmousedown="dragStart(event,this.parentElement)">
-      <span>Notepad</span>
+      Notepad
       <div>
         <button onclick="minimizeApp('note')">—</button>
         <button onclick="closeApp('note')">✖</button>
@@ -75,7 +80,7 @@
   <!-- BROWSER -->
   <div class="window large" id="browser">
     <div class="header" onmousedown="dragStart(event,this.parentElement)">
-      <span>Browser</span>
+      Browser
       <div>
         <button onclick="minimizeApp('browser')">—</button>
         <button onclick="closeApp('browser')">✖</button>
@@ -85,10 +90,29 @@
       <div class="browser-bar">
         <button onclick="goBack()">⬅</button>
         <button onclick="goForward()">➡</button>
-        <input type="text" id="url" placeholder="Search or enter website...">
+        <input id="url" placeholder="Search or enter website...">
         <button onclick="loadSite()">Go</button>
       </div>
       <iframe id="frame"></iframe>
+    </div>
+  </div>
+
+  <!-- FILE EXPLORER -->
+  <div class="window" id="files">
+    <div class="header" onmousedown="dragStart(event,this.parentElement)">
+      File Explorer
+      <div>
+        <button onclick="minimizeApp('files')">—</button>
+        <button onclick="closeApp('files')">✖</button>
+      </div>
+    </div>
+    <div class="content">
+      <ul>
+        <li>📄 Homework.txt</li>
+        <li>📄 Notes.doc</li>
+        <li>📁 Projects</li>
+        <li>📁 Pictures</li>
+      </ul>
     </div>
   </div>
 
@@ -97,7 +121,6 @@
 <!-- TASKBAR -->
 <div class="taskbar">
   <div onclick="toggleStart()">🪟</div>
-  <div id="task-apps"></div>
 </div>
 
 <script src="script.js"></script>
